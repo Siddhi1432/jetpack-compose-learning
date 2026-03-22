@@ -8,7 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
@@ -17,23 +17,32 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var message by remember { mutableStateOf("Click the button")  }
+            var count by remember { mutableStateOf(0)  }
 
             Column (
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.White),
-                verticalArrangement = Arrangement.Center
-            ){
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
-                    text = message,
-                    fontSize = 20.sp
+                    text = "Count: $count",
+                    fontSize = 30.sp
                 )
-                
+
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Button(onClick = { message = "You clicked the button" }) {
-                    Text(text = "Click me")
+                Row {
+                    Button(onClick = {count++}) {
+                        Text("+")
+                    }
+
+                    Spacer(modifier = Modifier.width(16.dp))
+
+                    Button(onClick = {count--}) {
+                        Text("-")
+                    }
                 }
             }
         }
