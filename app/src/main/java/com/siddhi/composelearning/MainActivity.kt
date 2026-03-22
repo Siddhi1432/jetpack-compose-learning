@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.*
 
 class MainActivity : ComponentActivity() {
@@ -17,33 +15,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var count by remember { mutableStateOf(0)  }
+            var name by remember { mutableStateOf("")  }
 
             Column (
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "Count: $count",
-                    fontSize = 30.sp
+                TextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Enter your name") },
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Row {
-                    Button(onClick = {count++}) {
-                        Text("+")
-                    }
-
-                    Spacer(modifier = Modifier.width(16.dp))
-
-                    Button(onClick = {count--}) {
-                        Text("-")
-                    }
-                }
+                Text(
+                    text = "Hello, $name!",
+                    fontSize = 22.sp
+                )
             }
         }
     }
